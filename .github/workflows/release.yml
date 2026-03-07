@@ -33,7 +33,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
@@ -46,7 +45,7 @@ jobs:
           workspaces: src-tauri
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build Tauri
         uses: tauri-apps/tauri-action@v0
