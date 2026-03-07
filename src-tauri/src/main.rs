@@ -69,7 +69,7 @@ fn storage_list(app: tauri::AppHandle, prefix: Option<String>) -> Result<Vec<Str
 
 /// Sanitize storage keys to prevent path traversal
 fn sanitize_key(key: &str) -> String {
-    key.replace(['/', '\\', '..', '\0'], "_")
+    key.replace(['/', '\\', '.', '\0'], "_")
         .chars()
         .filter(|c| c.is_alphanumeric() || *c == '-' || *c == '_' || *c == ':')
         .collect()
