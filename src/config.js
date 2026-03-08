@@ -6,11 +6,11 @@ export const DEFAULT_MAX_TOKENS = 4096;
 
 export const PROVIDERS = {
   anthropic:{name:"Anthropic",models:[
-    {id:"claude-sonnet-4-6-20250217",label:"Sonnet 4.6",input:3,output:15},
-    {id:"claude-opus-4-6-20250205",label:"Opus 4.6",input:15,output:75},
+    {id:"claude-sonnet-4-6-20260218",label:"Sonnet 4.6",input:3,output:15},
+    {id:"claude-opus-4-6-20260205",label:"Opus 4.6",input:15,output:75},
     {id:"claude-sonnet-4-5-20250929",label:"Sonnet 4.5",input:3,output:15},
     {id:"claude-haiku-4-5-20251001",label:"Haiku 4.5",input:.25,output:1.25},
-  ],defaultModel:"claude-sonnet-4-6-20250217",placeholder:"sk-ant-api03-..."},
+  ],defaultModel:"claude-sonnet-4-6-20260218",placeholder:"sk-ant-api03-..."},
   openai:{name:"OpenAI",models:[
     {id:"gpt-5.4",label:"GPT-5.4",input:2.5,output:15},
     {id:"gpt-5.2",label:"GPT-5.2",input:1.75,output:14},
@@ -130,24 +130,24 @@ export function makePresets(lang) {
     : "\n\nPlease respond entirely in English.";
   return {
     paper_review: { label: t.s_review, desc: t.s_review_d, icon: "§", rounds: 1, agents: [
-      { id:"r1", name:"Reviewer 1", role:"You are Reviewer 1 — a methodological expert for a top-tier journal. Focus on research design rigor, causal identification, statistical methods. Write a structured review with Major and Minor concerns."+lI, provider:"anthropic", model:"claude-sonnet-4-6-20250217", temp:.6, maxTokens: DEFAULT_MAX_TOKENS, color: COLORS[0] },
-      { id:"r2", name:"Reviewer 2", role:"You are Reviewer 2 — a theoretical contribution expert. Focus on theoretical framing, novelty, literature positioning. Write a structured review."+lI, provider:"anthropic", model:"claude-sonnet-4-6-20250217", temp:.6, maxTokens: DEFAULT_MAX_TOKENS, color: COLORS[1] },
-      { id:"ae", name:"Associate Editor", role:"You are the Associate Editor. Synthesize reviews into a decision letter with a clear editorial decision (Reject / Major Revision / Minor Revision / Accept)."+lI, provider:"anthropic", model:"claude-sonnet-4-6-20250217", temp:.4, maxTokens: DEFAULT_MAX_TOKENS, color: COLORS[2] },
+      { id:"r1", name:"Reviewer 1", role:"You are Reviewer 1 — a methodological expert for a top-tier journal. Focus on research design rigor, causal identification, statistical methods. Write a structured review with Major and Minor concerns."+lI, provider:"anthropic", model:"claude-sonnet-4-6-20260218", temp:.6, maxTokens: DEFAULT_MAX_TOKENS, color: COLORS[0] },
+      { id:"r2", name:"Reviewer 2", role:"You are Reviewer 2 — a theoretical contribution expert. Focus on theoretical framing, novelty, literature positioning. Write a structured review."+lI, provider:"anthropic", model:"claude-sonnet-4-6-20260218", temp:.6, maxTokens: DEFAULT_MAX_TOKENS, color: COLORS[1] },
+      { id:"ae", name:"Associate Editor", role:"You are the Associate Editor. Synthesize reviews into a decision letter with a clear editorial decision (Reject / Major Revision / Minor Revision / Accept)."+lI, provider:"anthropic", model:"claude-sonnet-4-6-20260218", temp:.4, maxTokens: DEFAULT_MAX_TOKENS, color: COLORS[2] },
     ]},
     idea_brainstorm: { label: t.s_brainstorm, desc: t.s_brainstorm_d, icon: "◊", rounds: 3, agents: [
-      { id:"vis", name:"Visionary", role:"You are 'The Visionary'. Generate bold research directions. Cross-field connections. Novel methodologies."+lI, provider:"anthropic", model:"claude-sonnet-4-6-20250217", temp:.9, maxTokens: DEFAULT_MAX_TOKENS, color: COLORS[3] },
-      { id:"str", name:"Strategist", role:"You are 'The Strategist'. Stress-test ideas. Suggest designs (RCT, DiD, IV, RDD, DML). Upgrade ideas."+lI, provider:"anthropic", model:"claude-sonnet-4-6-20250217", temp:.6, maxTokens: DEFAULT_MAX_TOKENS, color: COLORS[1] },
-      { id:"val", name:"Validator", role:"You are 'The Validator'. Assess publishability in top journals. Be demanding."+lI, provider:"anthropic", model:"claude-sonnet-4-6-20250217", temp:.5, maxTokens: DEFAULT_MAX_TOKENS, color: COLORS[0] },
+      { id:"vis", name:"Visionary", role:"You are 'The Visionary'. Generate bold research directions. Cross-field connections. Novel methodologies."+lI, provider:"anthropic", model:"claude-sonnet-4-6-20260218", temp:.9, maxTokens: DEFAULT_MAX_TOKENS, color: COLORS[3] },
+      { id:"str", name:"Strategist", role:"You are 'The Strategist'. Stress-test ideas. Suggest designs (RCT, DiD, IV, RDD, DML). Upgrade ideas."+lI, provider:"anthropic", model:"claude-sonnet-4-6-20260218", temp:.6, maxTokens: DEFAULT_MAX_TOKENS, color: COLORS[1] },
+      { id:"val", name:"Validator", role:"You are 'The Validator'. Assess publishability in top journals. Be demanding."+lI, provider:"anthropic", model:"claude-sonnet-4-6-20260218", temp:.5, maxTokens: DEFAULT_MAX_TOKENS, color: COLORS[0] },
     ]},
     student_qa: { label: t.s_student, desc: t.s_student_d, icon: "∴", rounds: 1, agents: [
-      { id:"ug", name: lang==="zh"?"好奇本科生":"Undergrad", role:"You are a curious undergraduate. Ask 2-3 fundamental questions."+lI, provider:"anthropic", model:"claude-sonnet-4-6-20250217", temp:.8, maxTokens: 2048, color: COLORS[4] },
-      { id:"phd", name: lang==="zh"?"博士同学":"PhD Peer", role:"You are a PhD student. Ask 2-3 pointed technical questions. Challenge assumptions."+lI, provider:"anthropic", model:"claude-sonnet-4-6-20250217", temp:.7, maxTokens: 2048, color: COLORS[1] },
-      { id:"prof", name: lang==="zh"?"资深教授":"Professor", role:"You are a tenured professor. Ask 2-3 high-level questions about contribution and positioning."+lI, provider:"anthropic", model:"claude-sonnet-4-6-20250217", temp:.6, maxTokens: 2048, color: COLORS[0] },
+      { id:"ug", name: lang==="zh"?"好奇本科生":"Undergrad", role:"You are a curious undergraduate. Ask 2-3 fundamental questions."+lI, provider:"anthropic", model:"claude-sonnet-4-6-20260218", temp:.8, maxTokens: 2048, color: COLORS[4] },
+      { id:"phd", name: lang==="zh"?"博士同学":"PhD Peer", role:"You are a PhD student. Ask 2-3 pointed technical questions. Challenge assumptions."+lI, provider:"anthropic", model:"claude-sonnet-4-6-20260218", temp:.7, maxTokens: 2048, color: COLORS[1] },
+      { id:"prof", name: lang==="zh"?"资深教授":"Professor", role:"You are a tenured professor. Ask 2-3 high-level questions about contribution and positioning."+lI, provider:"anthropic", model:"claude-sonnet-4-6-20260218", temp:.6, maxTokens: 2048, color: COLORS[0] },
     ]},
     revision_coach: { label: t.s_revision, desc: t.s_revision_d, icon: "¶", rounds: 1, agents: [
-      { id:"diag", name: lang==="zh"?"诊断师":"Diagnostician", role:"Analyze reviewer comments. Identify core issues by severity and type."+lI, provider:"anthropic", model:"claude-sonnet-4-6-20250217", temp:.5, maxTokens: DEFAULT_MAX_TOKENS, color: COLORS[0] },
-      { id:"revs", name: lang==="zh"?"策略师":"Strategist", role:"Create a revision roadmap. Prioritize changes, suggest improvements."+lI, provider:"anthropic", model:"claude-sonnet-4-6-20250217", temp:.6, maxTokens: DEFAULT_MAX_TOKENS, color: COLORS[1] },
-      { id:"resp", name: lang==="zh"?"回复撰写":"Response Crafter", role:"Draft a point-by-point response letter to reviewers."+lI, provider:"anthropic", model:"claude-sonnet-4-6-20250217", temp:.5, maxTokens: DEFAULT_MAX_TOKENS, color: COLORS[2] },
+      { id:"diag", name: lang==="zh"?"诊断师":"Diagnostician", role:"Analyze reviewer comments. Identify core issues by severity and type."+lI, provider:"anthropic", model:"claude-sonnet-4-6-20260218", temp:.5, maxTokens: DEFAULT_MAX_TOKENS, color: COLORS[0] },
+      { id:"revs", name: lang==="zh"?"策略师":"Strategist", role:"Create a revision roadmap. Prioritize changes, suggest improvements."+lI, provider:"anthropic", model:"claude-sonnet-4-6-20260218", temp:.6, maxTokens: DEFAULT_MAX_TOKENS, color: COLORS[1] },
+      { id:"resp", name: lang==="zh"?"回复撰写":"Response Crafter", role:"Draft a point-by-point response letter to reviewers."+lI, provider:"anthropic", model:"claude-sonnet-4-6-20260218", temp:.5, maxTokens: DEFAULT_MAX_TOKENS, color: COLORS[2] },
     ]},
   };
 }
