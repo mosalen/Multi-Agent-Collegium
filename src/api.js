@@ -26,13 +26,19 @@ export async function callAnthropic(key, model, system, user, temp, maxTokens, s
     throw new Error(e?.error?.message || `Anthropic ${r.status}`);
   }
   const d = await r.json();
-  console.log("Anthropic response:", JSON.stringify(d, null, 2).slice(0, 500));
+  const text = d.content?.filter(b => b.type === "text").map(b => b.text).join("\n");
+  if (!text) {
+    return {
+      text: "[DEBUG] Anthropic returned no text. Raw response: " + JSON.stringify(d).slice(0, 300),
+      inputTokens: d.usage?.input_tokens || 0,
+      outputTokens: d.usage?.output_tokens || 0,
+    };
+  }
   return {
-    text: d.content.filter(b => b.type === "text").map(b => b.text).join("\n"),
+    text,
     inputTokens: d.usage?.input_tokens || 0,
     outputTokens: d.usage?.output_tokens || 0,
   };
-}
 
 export async function callOpenAI(key, model, system, user, temp, maxTokens, signal) {
   const r = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -58,16 +64,20 @@ export async function callOpenAI(key, model, system, user, temp, maxTokens, sign
     throw new Error(e?.error?.message || `OpenAI ${r.status}`);
   }
   const d = await r.json();
-  console.log("OpenAI response:", JSON.stringify(d.choices?.[0]?.message, null, 2));
-  // GPT-5.x may put content in different fields
   const msg = d.choices?.[0]?.message;
   const text = msg?.content || msg?.reasoning_content || "";
+  if (!text) {
+    return {
+      text: "[DEBUG] OpenAI returned no text. Raw: " + JSON.stringify(msg || d).slice(0, 300),
+      inputTokens: d.usage?.prompt_tokens || 0,
+      outputTokens: d.usage?.completion_tokens || 0,
+    };
+  }
   return {
     text,
     inputTokens: d.usage?.prompt_tokens || 0,
     outputTokens: d.usage?.completion_tokens || 0,
   };
-}
 
 export async function callGoogle(key, model, system, user, temp, maxTokens, signal) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
