@@ -6,7 +6,7 @@ import { getModelPricing, DEFAULT_MAX_TOKENS } from "./config.js";
 
 // ─── Context Builder ──────────────────────────────────────────────
 
-function buildAgentContext({ agent, agentIndex, agents, allMessages, userInput, round, totalRounds, isFollowUp, followUpText }) {
+function buildAgentContext({ agent, agentIndex, agents, allMessages, userInput, round, totalRounds, isFollowUp, followUpText, lang }) {
   const parts = [];
 
   const inputText = userInput.length > 3000
@@ -69,6 +69,7 @@ You are "${agent.name}". You speak first in Round ${round}. Set the direction fo
   if (!isFollowUp) {
     parts.push(`Round ${round} of ${totalRounds}.`);
   }
+  parts.push(lang === "zh" ? "Please respond entirely in Chinese (简体中文)." : "Please respond entirely in English.");
 
   return parts.join("\n\n");
 }
@@ -200,6 +201,7 @@ export async function runDiscussion({
   rounds,
   userInput,
   apiKeys,
+  lang = "zh",
   enableSearch = true,
   existingMessages = [],
   isFollowUp = false,
@@ -235,7 +237,7 @@ export async function runDiscussion({
 
       const context = buildAgentContext({
         agent, agentIndex: i, agents, allMessages, userInput,
-        round, totalRounds: rounds, isFollowUp, followUpText,
+        round, totalRounds: rounds, isFollowUp, followUpText, lang,
       });
 
       var result;
