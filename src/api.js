@@ -56,8 +56,10 @@ export async function callOpenAI(key, model, system, user, temp, maxTokens, sign
     throw new Error(e?.error?.message || `OpenAI ${r.status}`);
   }
   const d = await r.json();
+  const msg = d.choices?.[0]?.message;
+  const text = msg?.content || msg?.reasoning_content || "";
   return {
-    text: d.choices[0].message.content,
+    text,
     inputTokens: d.usage?.prompt_tokens || 0,
     outputTokens: d.usage?.completion_tokens || 0,
   };
