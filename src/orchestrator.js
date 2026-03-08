@@ -238,7 +238,12 @@ export async function runDiscussion({
         round, totalRounds: rounds, isFollowUp, followUpText,
       });
 
-      const result = await runAgentWithTools(agent, context, apiKeys, enableSearch, signal);
+      var result;
+      try {
+        result = await runAgentWithTools(agent, context, apiKeys, enableSearch, signal);
+      } catch (agentErr) {
+        result = { text: "[ERROR] " + agent.name + " (" + agent.model + "): " + agentErr.message, inputTokens: 0, outputTokens: 0, cost: 0, searchResults: null };
+      }
 
       const msg = {
         agent,
