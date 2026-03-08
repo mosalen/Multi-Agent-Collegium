@@ -9,7 +9,7 @@ export const PROVIDERS = {
     {id:"claude-sonnet-4-6",label:"Sonnet 4.6",input:3,output:15},
     {id:"claude-opus-4-6",label:"Opus 4.6",input:15,output:75},
     {id:"claude-sonnet-4-5",label:"Sonnet 4.5",input:3,output:15},
-    {id:"claude-haiku-4-5-20251001",label:"Haiku 4.5",input:.25,output:1.25},
+    {id:"claude-haiku-4-5",label:"Haiku 4.5",input:.25,output:1.25},
   ],defaultModel:"claude-sonnet-4-6",placeholder:"sk-ant-api03-..."},
   openai:{name:"OpenAI",models:[
     {id:"gpt-5.4",label:"GPT-5.4",input:2.5,output:15},
