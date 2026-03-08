@@ -44,6 +44,10 @@ jobs:
         with:
           workspaces: src-tauri
 
+      - name: Install macOS dependencies
+        if: matrix.platform == 'macos-latest'
+        run: brew install create-dmg
+
       - name: Install dependencies
         run: npm install
 
