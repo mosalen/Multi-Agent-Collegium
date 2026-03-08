@@ -116,8 +116,8 @@ async function decideSearch(agent, context, apiKeys, signal) {
       agent.model,
       SEARCH_DECISION_PROMPT,
       context.slice(0, 2000), // Short context for quick decision
-      0.1,
-      256,
+      0.3,
+      1024,
       signal
     );
 
@@ -331,7 +331,7 @@ export async function runDiscussion({
       totalCost += result.cost;
       totalTokens += result.inputTokens + result.outputTokens;
 
-      onMessage?.(msg, totalCost, totalTokens);
+      onMessage?.(msg, totalCost, totalTokens, [...allMessages]);
     }
   }
 
