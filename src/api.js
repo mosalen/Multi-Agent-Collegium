@@ -52,7 +52,7 @@ export async function callOpenAI(key, model, system, user, temp, maxTokens, sign
     body: JSON.stringify({
       model,
       max_completion_tokens: maxTokens || 4096,
-      reasoning_effort: "medium",
+      temperature: temp,
       messages: [
         { role: "system", content: system },
         { role: "user", content: user },
