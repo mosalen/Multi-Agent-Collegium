@@ -12,7 +12,7 @@ export async function callAnthropic(key, model, system, user, temp, maxTokens, s
     },
     body: JSON.stringify({
       model,
-      max_tokens: maxTokens || 4096,
+      max_tokens: (maxTokens || 4096) * 4,
       temperature: temp,
       system,
       messages: [{ role: "user", content: user }],
@@ -51,7 +51,7 @@ export async function callOpenAI(key, model, system, user, temp, maxTokens, sign
     },
     body: JSON.stringify({
       model,
-      max_completion_tokens: maxTokens || 4096,
+      max_completion_tokens: (maxTokens || 4096) * 4,
       temperature: temp,
       reasoning_effort: "low",
       messages: [
@@ -95,7 +95,7 @@ export async function callGoogle(key, model, system, user, temp, maxTokens, sign
       contents: [{ parts: [{ text: user }] }],
       generationConfig: {
         temperature: temp,
-        maxOutputTokens: maxTokens || 4096,
+        maxOutputTokens: (maxTokens || 4096) * 4,
       },
     }),
   });
