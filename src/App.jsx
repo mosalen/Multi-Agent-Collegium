@@ -181,6 +181,7 @@ export default function App(){
         agents,rounds,
         userInput:isFollowUp?input:getFullInput(),
         apiKeys,
+        lang,
         enableSearch,
         existingMessages,
         isFollowUp,
