@@ -26,6 +26,7 @@ export async function callAnthropic(key, model, system, user, temp, maxTokens, s
     throw new Error(e?.error?.message || `Anthropic ${r.status}`);
   }
   const d = await r.json();
+  console.log("Anthropic response:", JSON.stringify(d, null, 2).slice(0, 500));
   return {
     text: d.content.filter(b => b.type === "text").map(b => b.text).join("\n"),
     inputTokens: d.usage?.input_tokens || 0,
@@ -57,6 +58,7 @@ export async function callOpenAI(key, model, system, user, temp, maxTokens, sign
     throw new Error(e?.error?.message || `OpenAI ${r.status}`);
   }
   const d = await r.json();
+  console.log("OpenAI response:", JSON.stringify(d.choices?.[0]?.message, null, 2));
   // GPT-5.x may put content in different fields
   const msg = d.choices?.[0]?.message;
   const text = msg?.content || msg?.reasoning_content || "";
