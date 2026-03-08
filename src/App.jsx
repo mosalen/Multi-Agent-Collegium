@@ -186,12 +186,11 @@ export default function App(){
         isFollowUp,
         followUpText:isFollowUp?userInput:"",
         signal:ctrl.signal,
-        onMessage:(msg,cost,tokens)=>{
+        onMessage:(msg,cost,tokens,allMsgs)=>{
           setMessages(prev=>[...prev,msg]);
           if(cost!==undefined)setTotalCost(cost);
           if(tokens!==undefined)setTotalTokens(tokens);
-          // Auto-save after each message
-          autoSave([...existingMessages,...[msg]],sid);
+          if(allMsgs)autoSave(allMsgs,sid);
         },
         onStatus:(status)=>{
           if(status.type==="round")setCurRound(status.round);
