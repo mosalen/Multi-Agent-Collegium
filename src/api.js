@@ -53,6 +53,7 @@ export async function callOpenAI(key, model, system, user, temp, maxTokens, sign
       model,
       max_completion_tokens: maxTokens || 4096,
       temperature: temp,
+      reasoning_effort: "none",
       messages: [
         { role: "system", content: system },
         { role: "user", content: user },
